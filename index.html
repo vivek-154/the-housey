@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Housey</title>
+<style>body{font-family:sans-serif;max-width:640px;margin:auto;padding:12px;background:#f6f7fb}
+.card{background:#fff;border-radius:10px;padding:12px;margin:10px 0;box-shadow:0 1px 3px #0002}
+button{padding:6px 10px;margin:4px 4px 0 0}.ok{color:green}.bad{color:#b45309}</style></head><body>
+<h2>🏠 The Housey</h2><p>Your Safe Home Away From Home</p>
+<div class="card">Max rent <input id="rent" type="number" value="8000" style="width:80px">
+<label><input id="girls" type="checkbox"> Girls only</label>
+<label><input id="ver" type="checkbox"> Verified only</label>
+<button onclick="load()">Search</button></div>
+<div id="list"></div><pre id="out" class="card"></pre>
+<script>
+async function load(){
+ const q=new URLSearchParams({max_rent:rent.value,girls_only:girls.checked,verified_only:ver.checked});
+ const r=await (await fetch('/properties?'+q)).json();
+ list.innerHTML=r.map(p=>`<div class="card"><b>${p.title}</b> ${p.verified?'<span class="ok">✓ Verified</span>':'<span class="bad">Unverified</span>'}
+ ${p.girls_only?'👩 Girls only':''}<br>${p.area} · ${p.distance_km} km from college<br>Rent ₹${p.rent} · Deposit ₹${p.deposit}<br>
+ ${p.amenities}<br>Rating: ${p.avg_rating??'none'}<br>
+ <button onclick="book(${p.id})">Book (mock escrow)</button><button onclick="report(${p.id})">Report safety issue</button></div>`).join('');
+}
+let last=null;
+async function book(id){const s=prompt('Your name?');if(!s)return;
+ last=await (await fetch('/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({property_id:id,student:s})})).json();
+ out.textContent=JSON.stringify(last,null,2);}
+async function report(id){if(!last)return alert('Book a room first');const d=prompt('Describe the concern');if(!d)return;
+ const r=await (await fetch('/complaints',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({booking_id:last.id,kind:'safety',details:d})})).json();
+ out.textContent=JSON.stringify(r,null,2);}
+load();
+</script></body></html>

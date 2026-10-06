@@ -1,0 +1,8 @@
+[
+{"owner":"Mrs. Sharma","title":"Sharma Girls PG","area":"Kota Nagar","rent":6500,"deposit":6500,"distance_km":0.8,"girls_only":true,"amenities":"Wi-Fi, meals, CCTV, laundry","verified":true},
+{"owner":"R. Verma","title":"Verma Student Rooms","area":"Kota Nagar","rent":4500,"deposit":4500,"distance_km":1.5,"girls_only":false,"amenities":"Wi-Fi, study table","verified":true},
+{"owner":"A. Khan","title":"Scholars Hostel","area":"University Road","rent":5500,"deposit":5000,"distance_km":0.5,"girls_only":false,"amenities":"Meals, laundry, Wi-Fi","verified":true},
+{"owner":"S. Gupta","title":"Gupta Ladies Hostel","area":"University Road","rent":7000,"deposit":7000,"distance_km":1.0,"girls_only":true,"amenities":"Security guard, CCTV, meals","verified":true},
+{"owner":"P. Singh","title":"Budget Shared Room","area":"Old City","rent":3000,"deposit":3000,"distance_km":4.0,"girls_only":false,"amenities":"Shared kitchen","verified":false},
+{"owner":"M. Joshi","title":"Joshi Villa Rooms","area":"Old City","rent":4000,"deposit":8000,"distance_km":3.2,"girls_only":false,"amenities":"Wi-Fi","verified":false}
+]
